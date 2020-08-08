@@ -7,6 +7,12 @@
 (define (instr-field instr start end)
   (bit-field instr start (+ end 1)))
 
+;; https://en.wikipedia.org/wiki/Two%27s_complement#Converting_from_two's_complement_representation
+(define (twos-complement numbits input)
+  (let ((mask (expt 2 (- numbits 1))))
+    (+ (* -1 (bitwise-and input mask))
+       (bitwise-and input (bitwise-not mask)))))
+
 (define (instr-opcode instr)
   (instr-field instr 0 6))
 
@@ -26,26 +32,31 @@
   (instr-field instr 7 11))
 
 (define (instr-i-imm instr)
-  (instr-field instr 20 31))
+  (twos-complement 12
+    (instr-field instr 20 31)))
 
 (define (instr-s-imm instr)
-  (bitwise-ior
-    (arithmetic-shift (instr-field instr 25 31) 5)
-    (instr-field instr 7 11)))
+  (twos-complement 12
+    (bitwise-ior
+      (arithmetic-shift (instr-field instr 25 31) 5)
+      (instr-field instr 7 11))))
 
 (define (instr-b-imm instr)
-  (bitwise-ior
-    (arithmetic-shift (instr-field instr 31 31) 12)
-    (arithmetic-shift (instr-field instr 7 7) 11)
-    (arithmetic-shift (bit-field instr 25 30) 5)
-    (arithmetic-shift (instr-field instr 8 11) 1)))
+  (twos-complement 12
+    (bitwise-ior
+      (arithmetic-shift (instr-field instr 31 31) 12)
+      (arithmetic-shift (instr-field instr 7 7) 11)
+      (arithmetic-shift (bit-field instr 25 30) 5)
+      (arithmetic-shift (instr-field instr 8 11) 1))))
 
 (define (instr-u-imm instr)
-  (instr-field instr 12 31))
+  (twos-complement 20
+    (instr-field instr 12 31)))
 
 (define (instr-j-imm instr)
-  (bitwise-ior
-    (arithmetic-shift (instr-field instr 31 31) 20)
-    (arithmetic-shift (instr-field instr 19 12) 12)
-    (arithmetic-shift (instr-field instr 20 20) 11)
-    (arithmetic-shift (instr-field instr 21 30) 1)))
+  (twos-complement 20
+    (bitwise-ior
+      (arithmetic-shift (instr-field instr 31 31) 20)
+      (arithmetic-shift (instr-field instr 19 12) 12)
+      (arithmetic-shift (instr-field instr 20 20) 11)
+      (arithmetic-shift (instr-field instr 21 30) 1))))
