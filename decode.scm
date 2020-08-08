@@ -50,8 +50,10 @@
       (arithmetic-shift (instr-field instr 8 11) 1))))
 
 (define (instr-u-imm instr)
-  (twos-complement 20
-    (instr-field instr 12 31)))
+  (arithmetic-shift
+    (twos-complement 20
+      (instr-field instr 12 31))
+    12))
 
 (define (instr-j-imm instr)
   (twos-complement 20
