@@ -10,6 +10,8 @@
 (define addi-instr #x02a30293)
 ;; sw x1, 23(x9)
 (define sw-instr #x0014aba3)
+;; lui x28, 0xfffff
+(define lui-instr #xfffffe37)
 
 (test-group "decode R-type"
   (test "parse add instruction opcode"
@@ -77,3 +79,16 @@
   (test "parse sw instruction funct3"
     #b010
     (instr-funct3 sw-instr)))
+
+(test-group "decode U-type"
+  (test "parse lui instruction opcode"
+    #b0110111
+    (instr-opcode lui-instr))
+
+  (test "parse lui instruction rd"
+    28
+    (instr-rd lui-instr))
+
+  (test "parse lui imm"
+    #xfffff
+    (instr-u-imm lui-instr)))
