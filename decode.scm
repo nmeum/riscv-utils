@@ -30,7 +30,7 @@
 
 (define (instr-s-imm instr)
   (bitwise-ior
-    (instr-field instr 25 31)
+    (arithmetic-shift (instr-field instr 25 31) 5)
     (instr-field instr 7 11)))
 
 (define (instr-b-imm instr)
