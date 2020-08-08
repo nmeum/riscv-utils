@@ -1,0 +1,8 @@
+((author "Sören Tempel")
+ (synopsis "A tracker for reading material")
+ (license "GPLv3")
+ (dependencies srfi-151)
+ (test-dependencies test)
+ (components
+   (extension riscv
+              (source "riscv.scm"))))

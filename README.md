@@ -2,18 +2,36 @@
 
 This repository provides various utilities for the [RISC-V][riscv website] instruction set.
 
-## Installation
-
-To-do.
-
 ## Usage
 
-The utilities are supposed to be used from within a Scheme REPL. The
-following utilities are currently provided in this repository:
+The code is supposed to be used from a Scheme REPL, no binaries are
+provided. The Scheme files in the `riscv/` directory are mostly(?) R5R7
+(or R7RS?) compatible. It should be possible to use them with any
+standard compliant Scheme implementation which provides an
+[SRFI-151 module][sfri-151]. Just load the files you want to use
+using `(load "riscv/<file>.scm")` from your Scheme REPL.
 
-* `decode.scm`: Functions for decoding RISC-V instructions
-* `encode.scm`: Functions for encoding RISC-V instructions
-* …
+If your favorite Scheme implementation is [CHICKEN][call-cc], read on.
+
+## Installation
+
+In addition to standard compliant(?) Scheme source code, this
+repository also contains the required files for using the code as a
+[CHICKEN Scheme][call-cc] [egg][call-cc eggs]. However, since
+the code is still in very early stages of development I haven't
+published it as an egg yet. Nonetheless, an egg can be built
+locally using:
+
+	$ chicken-install -test
+
+### Building without installing
+
+If installation is not desired, build as follows:
+
+	$ export CHICKEN_REPOSITORY_PATH="${CHICKEN_REPOSITORY_PATH}:$(pwd)"
+	$ chicken-install -n -test
+
+Afterwards simply run `(import riscv)` in `csi(1)` as usual.
 
 ## License
 
@@ -31,3 +49,6 @@ You should have received a copy of the GNU General Public License along
 with this program. If not, see <http://www.gnu.org/licenses/>.
 
 [riscv website]: https://riscv.org/
+[srfi-151]: https://srfi.schemers.org/srfi-151/srfi-151.html
+[call-cc]: https://call-cc.org
+[call-cc eggs]: https://eggs.call-cc.org/

@@ -1,5 +1,4 @@
-(import srfi-151 test)
-(include "decode.scm")
+(import riscv test)
 
 ;; Machine code for a given instruction can be obtained
 ;; easily using: riscv32-unknown-elf-objdump -d <binary>.
