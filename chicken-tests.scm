@@ -12,6 +12,8 @@
 (define sw-instr #x0014aba3)
 ;; lui x28, 0xfffff
 (define lui-instr #xfffffe37)
+;; beq x10, x11, 10074
+(define beq-instr #x02b50063)
 
 (test-group "decode R-type"
   (test "parse add instruction opcode"
@@ -92,3 +94,24 @@
   (test "parse lui imm"
     #xfffff
     (instr-u-imm lui-instr)))
+
+(test-group "decode B-type"
+  (test "parse beq instruction opcode"
+    #b1100011
+    (instr-opcode beq-instr))
+
+  (test "parse beq instruction rs1"
+    10
+    (instr-rs1 beq-instr))
+
+  (test "parse beq instruction rs2"
+    11
+    (instr-rs2 beq-instr))
+
+  (test "parse beq instruction imm"
+    32
+    (instr-b-imm beq-instr))
+
+  (test "parse beq instruction funct3"
+    #b000
+    (instr-funct3 beq-instr)))
