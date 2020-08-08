@@ -4,7 +4,7 @@
 (define (new-field startpos value)
   (arithmetic-shift value startpos))
 
-(define (new-r-type opcode funct3 funct7
+(define (r-type opcode funct3 funct7
           rs1 rs2 rd)
   (new-instruction
     (new-field 25 funct7)
