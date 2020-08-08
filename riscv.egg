@@ -5,4 +5,7 @@
  (test-dependencies test)
  (components
    (extension riscv
-              (source "riscv.scm"))))
+              (source "riscv.scm")
+              (source-dependencies
+                "./riscv/encode.scm"
+                "./riscv/decode.scm"))))
