@@ -21,4 +21,12 @@
 
   (test "parse add instruction rs2"
     10
-    (instr-rs2 add-instr)))
+    (instr-rs2 add-instr))
+
+  (test "parse add instruction func3"
+    #b000
+    (instr-funct3 add-instr))
+
+  (test "parse add instruction func7"
+    #b0000000
+    (instr-funct7 add-instr)))

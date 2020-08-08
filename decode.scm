@@ -11,3 +11,9 @@
 
 (define (instr-rd instr)
   (bit-field instr 7 11))
+
+(define (instr-funct3 instr)
+  (bit-field instr 12 14))
+
+(define (instr-funct7 instr)
+  (bit-field instr 25 31))
