@@ -8,6 +8,8 @@
 (define add-instr #x00a605b3)
 ;; addi x5, x6, 42
 (define addi-instr #x02a30293)
+;; sw x1, 23(x9)
+(define sw-instr #x0014aba3)
 
 (test-group "decode R-type"
   (test "parse add instruction opcode"
@@ -54,3 +56,24 @@
   (test "parse addi instruction funct3"
     #b000
     (instr-funct3 addi-instr)))
+
+(test-group "decode S-type"
+  (test "parse sw instruction opcode"
+    #b0100011
+    (instr-opcode sw-instr))
+
+  (test "parse sw instruction rs1"
+    9
+    (instr-rs1 sw-instr))
+
+  (test "parse sw instruction rs2"
+    1
+    (instr-rs2 sw-instr))
+
+  (test "parse sw instruction imm"
+    23
+    (instr-s-imm sw-instr))
+
+  (test "parse sw instruction funct3"
+    #b010
+    (instr-funct3 sw-instr)))
