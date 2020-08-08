@@ -33,5 +33,12 @@
     (instr-field instr 25 31)
     (instr-field instr 7 11)))
 
+(define (instr-b-imm instr)
+  (bitwise-ior
+    (arithmetic-shift (instr-field instr 31 31) 12)
+    (arithmetic-shift (instr-field instr 7 7) 11)
+    (arithmetic-shift (bit-field instr 25 30) 5)
+    (arithmetic-shift (instr-field instr 8 11) 1)))
+
 (define (instr-u-imm instr)
   (instr-field instr 12 31))
