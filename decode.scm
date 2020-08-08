@@ -42,3 +42,10 @@
 
 (define (instr-u-imm instr)
   (instr-field instr 12 31))
+
+(define (instr-j-imm instr)
+  (bitwise-ior
+    (arithmetic-shift (instr-field instr 31 31) 20)
+    (arithmetic-shift (instr-field instr 19 12) 12)
+    (arithmetic-shift (instr-field instr 20 20) 11)
+    (arithmetic-shift (instr-field instr 21 30) 1)))
