@@ -5,8 +5,8 @@ This repository provides various utilities for the [RISC-V][riscv website] instr
 ## Usage
 
 The code is supposed to be used from a Scheme REPL, no binaries are
-provided. The Scheme files in the `riscv/` directory are mostly(?) R5R7
-(or R7RS?) compatible. It should be possible to use them with any
+provided. The Scheme files in the `riscv/` directory are mostly(?)
+R7RS compatible. It should be possible to use them with any
 standard compliant Scheme implementation which provides an
 [SRFI-151 module][sfri-151]. Just load the files you want to use
 using `(load "riscv/<file>.scm")` from your Scheme REPL.
