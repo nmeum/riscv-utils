@@ -12,6 +12,7 @@ The utilities are supposed to be used from within a Scheme REPL. The
 following utilities are currently provided in this repository:
 
 * `decode.scm`: Functions for decoding RISC-V instructions
+* `encode.scm`: Functions for encoding RISC-V instructions
 * …
 
 ## License
