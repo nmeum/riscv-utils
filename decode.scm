@@ -1,9 +1,9 @@
 (import srfi-151)
 
 ;; The instr-field function from SRFI-151 returns a bit field in the
-;; interval [start, end - 1]. Contrary to instr-field, this functions
-;; returns a field in the interval [start, end] to allow using the
-;; same instr-field indices as speciified by the RISC-V specification.
+;; interval [start, end - 1]. Contrary to bit, this function returns a
+;; field in the interval [start, end] to allow using the same
+;; instruction indices as specified by the RISC-V specification.
 (define (instr-field instr start end)
   (bit-field instr start (+ end 1)))
 
