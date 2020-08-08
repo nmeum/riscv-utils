@@ -12,8 +12,10 @@
 (define sw-instr #x0014aba3)
 ;; lui x28, 0xfffff
 (define lui-instr #xfffffe37)
-;; beq x10, x11, 10074
+;; beq x10, x11, 32
 (define beq-instr #x02b50063)
+;; jal ra, 32
+(define jal-instr #x020000ef)
 
 (test-group "decode R-type"
   (test "parse add instruction opcode"
@@ -115,3 +117,16 @@
   (test "parse beq instruction funct3"
     #b000
     (instr-funct3 beq-instr)))
+
+(test-group "decode J-type"
+  (test "parse jal instruction opcode"
+    #b1101111
+    (instr-opcode jal-instr))
+
+  (test "parse jal instruction rd"
+    1
+    (instr-rd jal-instr))
+
+  (test "parse jal instruction imm"
+    32
+    (instr-j-imm jal-instr)))
