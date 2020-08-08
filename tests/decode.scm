@@ -1,5 +1,3 @@
-(import riscv test)
-
 (test-group "decode R-type"
   (test "parse add instruction opcode"
     #b0110011
