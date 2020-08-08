@@ -4,5 +4,7 @@
 (include-relative "testdata.scm")
 
 ;; Include test cases
-(test-group "decoder"
+(test-group "decode"
   (include-relative "decode.scm"))
+(test-group "encode"
+  (include-relative "encode.scm"))
