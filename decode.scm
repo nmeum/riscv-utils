@@ -20,3 +20,8 @@
 
 (define (instr-i-imm instr)
   (bit-field instr 20 31))
+
+(define (instr-s-imm instr)
+  (bitwise-ior
+    (bit-field instr 25 31)
+    (bit-field instr 7 11)))
