@@ -32,3 +32,6 @@
   (bitwise-ior
     (instr-field instr 25 31)
     (instr-field instr 7 11)))
+
+(define (instr-u-imm instr)
+  (instr-field instr 12 31))
