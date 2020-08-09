@@ -1,19 +1,27 @@
 (import srfi-151)
 
-(define new-instruction bitwise-ior)
-(define (new-field start size value)
+;; TODO: This would be cleaner without a global variable.
+;; Not proficient enough with macros to achieve this though.
+(define field-pos 32)
+(define-syntax new-instr
+  (syntax-rules ()
+    ((new-instr body ...)
+     (begin
+       (set! field-pos 32)
+       (bitwise-ior body ...)))))
+(define (new-field value size)
   (if (> value (expt 2 (- size 1)))
-    (error "given value too large for field"))
-    (arithmetic-shift value start))
+    (error "given value too large for field")
+    (begin
+      (set! field-pos (- field-pos size))
+      (arithmetic-shift value field-pos))))
 
 (define (r-type opcode funct3 funct7
           rs1 rs2 rd)
-  ;; TODO: Only pass the size, not the position.
-  ;; The position can be infered from size of previous field.
-  (new-instruction
-    (new-field 25 07 funct7)
-    (new-field 20 05 rs2)
-    (new-field 15 05 rs1)
-    (new-field 12 03 funct3)
-    (new-field 07 05 rd)
-    (new-field 00 07 opcode)))
+  (new-instr
+    (new-field funct7 07)
+    (new-field rs2 05)
+    (new-field rs1 05)
+    (new-field funct3 03)
+    (new-field rd 05)
+    (new-field opcode 07)))
