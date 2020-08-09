@@ -25,3 +25,8 @@
     (test-exception
       (r-type #b0110011 #b000 #b0000000
               12 10 42))))
+
+(test-group "encode i-type"
+  (test "encode addi instruction"
+    addi-instr
+    (i-type #b0010011 #b000 6 5 42)))
