@@ -1,5 +1,14 @@
 (import srfi-151)
 
+(define (to-twocomp value size)
+  (let ((max (/ (expt 2 size) 2)))
+    (if (or (>= value max)
+            (< value (* -1 max)))
+      (error "given signed value too large for field")
+      (if (negative? value)
+        (+ (expt 2 size) value)
+        value))))
+
 (define (new-field value position size)
   (if (> value (- (expt 2 size) 1))
     (error "given value too large for field")
