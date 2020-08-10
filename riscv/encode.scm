@@ -1,7 +1,7 @@
 (import srfi-151)
 
 (define (new-field value position size)
-  (if (> value (expt 2 (- size 1)))
+  (if (> value (- (expt 2 size) 1))
     (error "given value too large for field")
     (begin
       (arithmetic-shift value position))))
