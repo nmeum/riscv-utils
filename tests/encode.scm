@@ -23,10 +23,18 @@
   (test "encode add instruction with invalid RD"
     exception-raised
     (test-exception
-      (r-type #b0110011 #b000 #b0000000
-              12 10 42))))
+      (r-type #b0110011 #b000 #b0000000 12 10 42))))
 
 (test-group "encode i-type"
   (test "encode addi instruction"
     addi-instr
-    (i-type #b0010011 #b000 6 5 42)))
+    (i-type #b0010011 #b000 6 5 42))
+
+  (test "encode addi with negative immediate"
+    -23
+    (instr-i-imm (i-type #b0010011 #b000 6 5 -23)))
+
+  (test "encode addi with invalide immediate"
+    exception-raised
+    (test-exception
+      (i-type #b0010011 #b000 6 5 2048))))

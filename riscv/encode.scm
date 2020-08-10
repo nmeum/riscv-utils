@@ -41,7 +41,7 @@
 
 (define (i-type opcode funct3 rs1 rd imm)
   (new-instr 32
-    (field imm 12)
+    (field-signed imm 12)
     (field rs1 5)
     (field funct3 3)
     (field rd 5)
