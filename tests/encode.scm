@@ -38,3 +38,13 @@
     exception-raised
     (test-exception
       (i-type #b0010011 #b000 6 5 2048))))
+
+(test-group "encode s-type"
+  (test "encode sw instruction"
+    sw-instr
+    (s-type #b0100011 #b010 9 1 23))
+
+  (test "encode sw instruction with invalid immediate"
+    exception-raised
+    (test-exception
+      (s-type #b0100011 #b010 9 1 (expt 2 12)))))

@@ -1,5 +1,10 @@
 (import srfi-151)
 
+;; Wrapper around bit-field to support the imm[end:start]
+;; syntax used in the RISC-V specification.
+(define (imm-field instr end start)
+  (bit-field instr start (+ end 1)))
+
 (define (to-twocomp value size)
   (let ((max (/ (expt 2 size) 2)))
     (if (or (>= value max)
@@ -46,3 +51,14 @@
     (field funct3 3)
     (field rd 5)
     (field opcode 7)))
+
+(define (s-type opcode funct3 rs1 rs2 imm)
+  (if (>= imm (expt 2 12))
+    (error "immediate exceeds maximum value")
+    (new-instr 32
+      (field-signed (imm-field imm 11 5) 7)
+      (field rs2 5)
+      (field rs1 5)
+      (field funct3 3)
+      (field (imm-field imm 4 0) 5)
+      (field opcode 7))))
