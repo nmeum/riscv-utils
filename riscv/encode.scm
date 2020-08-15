@@ -5,14 +5,14 @@
 (define (imm-field instr end start)
   (bit-field instr start (+ end 1)))
 
-(define (to-twocomp value size)
-  (let ((max (/ (expt 2 size) 2)))
-    (if (or (>= value max)
-            (< value (* -1 max)))
+(define (to-twocomp numbits input)
+  (let ((max (/ (expt 2 numbits) 2)))
+    (if (or (>= input max)
+            (< input (* -1 max)))
       (error "given signed value too large for field")
-      (if (negative? value)
-        (+ (expt 2 size) value)
-        value))))
+      (if (negative? input)
+        (+ (expt 2 numbits) input)
+        input))))
 
 (define (new-field value size position)
   (if (> value (- (expt 2 size) 1))
@@ -39,7 +39,7 @@
     (field opcode 7)))
 
 (define (i-type opcode funct3 rs1 rd imm)
-  (let ((imm-signed (to-twocomp imm 12)))
+  (let ((imm-signed (to-twocomp 12 imm)))
     (new-instr 32
       (field imm-signed 12)
       (field rs1 5)
@@ -48,7 +48,7 @@
       (field opcode 7))))
 
 (define (s-type opcode funct3 rs1 rs2 imm)
-  (let ((imm-signed (to-twocomp imm 12)))
+  (let ((imm-signed (to-twocomp 12 imm)))
     (new-instr 32
       (field (imm-field imm-signed 11 5) 7)
       (field rs2 5)
