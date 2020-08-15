@@ -5,12 +5,21 @@
                                  (* -1 (* nth 8)))
                #xff))
 
+(define (byte-swap u32)
+  (bitwise-ior
+    (arithmetic-shift (get-byte u32 0) 24)
+    (arithmetic-shift (get-byte u32 1) 16)
+    (arithmetic-shift (get-byte u32 2) 8)
+    (get-byte u32 3)))
+
 (define (from-le instr)
   instr)
 
 (define (from-be instr)
-  (bitwise-ior
-    (arithmetic-shift (get-byte instr 0) 24)
-    (arithmetic-shift (get-byte instr 1) 16)
-    (arithmetic-shift (get-byte instr 2) 8)
-    (get-byte instr 3)))
+  (byte-swap instr))
+
+(define (to-le instr)
+  instr)
+
+(define (to-be instr)
+  (byte-swap instr))

@@ -10,7 +10,7 @@
   (export r-type i-type s-type u-type)
 
   ;; Converter procedures
-  (export from-le from-be)
+  (export from-le from-be to-le to-be)
 
   (include "riscv/decode.scm")
   (include "riscv/encode.scm")
