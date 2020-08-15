@@ -14,7 +14,7 @@
               (begin body ...)
               (con (not exception-raised))))))))))
 
-(test-group "encode r-type"
+(test-group "encode R-type"
   (test "encode add instruction"
     add-instr
     (r-type #b0110011 #b000 #b0000000
@@ -25,7 +25,7 @@
     (test-exception
       (r-type #b0110011 #b000 #b0000000 12 10 42))))
 
-(test-group "encode i-type"
+(test-group "encode I-type"
   (test "encode addi instruction"
     addi-instr
     (i-type #b0010011 #b000 6 5 42))
@@ -39,7 +39,7 @@
     (test-exception
       (i-type #b0010011 #b000 6 5 2048))))
 
-(test-group "encode s-type"
+(test-group "encode S-type"
   (test "encode sw instruction"
     sw-instr
     (s-type #b0100011 #b010 9 1 23))
