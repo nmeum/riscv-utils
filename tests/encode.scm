@@ -52,4 +52,9 @@
 (test-group "encode u-type"
   (test "encode lui instruction"
     lui-instr
-    (u-type #b0110111 28 #xfffff)))
+    (u-type #b0110111 28 #xfffff))
+
+  (test "encode lui instruction with invalid immediate"
+    exception-raised
+    (test-exception
+      (u-type #b0110111 28 (expt 2 20)))))
