@@ -12,6 +12,10 @@
     (arithmetic-shift (get-byte u32 2) 8)
     (get-byte u32 3)))
 
+;;;;
+;; Byte order conversion
+;;;;
+
 (define (le->instr instr)
   instr)
 
@@ -23,3 +27,12 @@
 
 (define (instr->be instr)
   (byte-swap instr))
+
+;;;;
+;; Output format conversion
+;;;;
+
+(define (instr->bin instr)
+  (string-append "#b"
+    (bitwise-fold (lambda (bit output)
+      (string-append (if bit "1" "0") output)) "" instr)))

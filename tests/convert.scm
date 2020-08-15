@@ -1,13 +1,12 @@
-(test-group "conversion from functions"
+(test-group "byte order converison"
   (test "le->instr"
     lui-instr
     (le->instr lui-instr))
 
   (test "be->instr"
     lui-instr
-    (be->instr #x37feffff)))
+    (be->instr #x37feffff))
 
-(test-group "conversion to functions"
   (test "instr->le"
     beq-instr
     (instr->le beq-instr))
@@ -15,3 +14,12 @@
   (test "instr->be"
     beq-instr
     (instr->be #x6300b502)))
+
+(test-group "output conversion"
+  (test "instr->bin hex"
+    "#b100011"
+    (instr->bin #x23))
+
+  (test "instr->bin binary"
+    "#b111111111111"
+    (instr->bin #b111111111111)))
