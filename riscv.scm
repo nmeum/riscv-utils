@@ -7,7 +7,7 @@
           instr-b-imm instr-u-imm instr-j-imm)
 
   ;; Encoder procedures
-  (export r-type i-type s-type b-type u-type)
+  (export r-type i-type s-type b-type u-type j-type)
 
   ;; Converter procedures
   (export from-le from-be to-le to-be)

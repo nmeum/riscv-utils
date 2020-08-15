@@ -67,3 +67,8 @@
     exception-raised
     (test-exception
       (u-type #b0110111 28 (expt 2 20)))))
+
+(test-group "encode J-type"
+  (test "encode jal instruction"
+    jal-instr
+    (j-type #b1101111 1 32)))

@@ -80,3 +80,12 @@
     (field imm 20)
     (field rd 5)
     (field opcode 7)))
+
+(define (j-type opcode rd imm)
+  (new-instr INSTR_SIZE
+    (field (imm-field-single imm 20) 1)
+    (field (imm-field imm 10 1) 10)
+    (field (imm-field-single imm 11) 1)
+    (field (imm-field imm 19 12) 8)
+    (field rd 5)
+    (field opcode 7)))
