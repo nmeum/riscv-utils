@@ -75,7 +75,7 @@
     (instr-rd lui-instr))
 
   (test "parse lui imm"
-    -4096
+    #xfffff
     (instr-u-imm lui-instr)))
 
 (test-group "decode B-type"
