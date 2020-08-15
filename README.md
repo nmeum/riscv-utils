@@ -2,6 +2,16 @@
 
 This repository provides various utilities for the [RISC-V][riscv website] instruction set.
 
+## Features
+
+The feature set of provided procedures is centered around easing the
+development of utilities for RISC-V (especially instruction set
+simulators). Currently the following features a provided:
+
+* `decode.scm`: Decoding of RISC-V instructions.
+* `encode.scm`: Encoding of RISC-V instructions.
+* `convert.scm`: Conversion from/to different representations.
+
 ## Usage
 
 The code is supposed to be used from a Scheme REPL, no binaries are
