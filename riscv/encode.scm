@@ -14,21 +14,15 @@
         (+ (expt 2 size) value)
         value))))
 
-(define signed-field to-twocomp)
-(define (unsigned-field value size)
+(define (new-field value size position)
   (if (> value (- (expt 2 size) 1))
     (error "given value too large for field")
-    value))
-
-(define (new-field value position)
-  (arithmetic-shift value position))
+    (arithmetic-shift value position)))
 
 (define-syntax new-instr
-  (syntax-rules (field field-signed)
+  (syntax-rules (field)
     ((new-instr N (field val siz))
-     (new-field (unsigned-field val siz) (- N siz)))
-    ((new-instr N (field-signed val siz))
-     (new-field (signed-field val siz) (- N siz)))
+     (new-field val siz (- N siz)))
     ((new-instr N (TYPE val siz) fields ...)
      (bitwise-ior
        (new-instr N (TYPE val siz))
@@ -45,23 +39,22 @@
     (field opcode 7)))
 
 (define (i-type opcode funct3 rs1 rd imm)
-  (new-instr 32
-    (field-signed imm 12)
-    (field rs1 5)
-    (field funct3 3)
-    (field rd 5)
-    (field opcode 7)))
+  (let ((imm-signed (to-twocomp imm 12)))
+    (new-instr 32
+      (field imm-signed 12)
+      (field rs1 5)
+      (field funct3 3)
+      (field rd 5)
+      (field opcode 7))))
 
 (define (s-type opcode funct3 rs1 rs2 imm)
-  ;; TODO: Convert to two's complement first, then split
-  (if (>= imm (expt 2 12))
-    (error "immediate exceeds maximum value")
+  (let ((imm-signed (to-twocomp imm 12)))
     (new-instr 32
-      (field-signed (imm-field imm 11 5) 7)
+      (field (imm-field imm-signed 11 5) 7)
       (field rs2 5)
       (field rs1 5)
       (field funct3 3)
-      (field (imm-field imm 4 0) 5) ;; XXX: field-signed
+      (field (imm-field imm-signed 4 0) 5)
       (field opcode 7))))
 
 (define (u-type opcode rd imm)
