@@ -24,6 +24,24 @@ using `(load "riscv/<file>.scm")` from your Scheme REPL.
 
 If your favorite Scheme implementation is [CHICKEN][call-cc], read on.
 
+## Example
+
+The API is intentionally very low-level. Nonetheless, many fun things
+can be done with it. The following example takes an existing `JAL`
+instruction (e.g. as extracted from a `riscv32-unknown-elf-objdump -d`
+output) and modifies it to jump somewhere else.
+
+	$ csi
+	> (import riscv)
+	> (set! jal #x0100056f)
+	> (instr-j-imm jal)
+	16
+	> (j-type (instr-opcode jal) (instr-rd jal) 32)
+	33555823
+
+The value `33555823` (`0x200056f`) is RISC-V machine code for a JAL
+instruction holing the value `32` (instead of `16`) as a J-immediate.
+
 ## Installation
 
 In addition to standard compliant(?) Scheme source code, this repository
