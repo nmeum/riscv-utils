@@ -23,9 +23,9 @@
   (syntax-rules (field)
     ((new-instr N (field val siz))
      (new-field val siz (- N siz)))
-    ((new-instr N (TYPE val siz) fields ...)
+    ((new-instr N (field val siz) fields ...)
      (bitwise-ior
-       (new-instr N (TYPE val siz))
+       (new-instr N (field val siz))
        (new-instr (- N siz) fields ...)))))
 
 (define (r-type opcode funct3 funct7
