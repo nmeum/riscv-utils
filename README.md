@@ -16,7 +16,7 @@ simulators). Currently the following features are provided:
 
 The code is supposed to be used from a Scheme REPL, no binaries are
 provided. The Scheme files in the `riscv/` directory are mostly(?)
-R7RS compatible. It should be possible to use them with any
+[R7RS][r7rs small] compatible. It should be possible to use them with any
 standard compliant Scheme implementation which provides an
 [SRFI-151][srfi-151] module. Just load the files you want to use
 using `(load "riscv/<file>.scm")` from your Scheme REPL.
@@ -59,5 +59,6 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 
 [riscv website]: https://riscv.org/
 [srfi-151]: https://srfi.schemers.org/srfi-151/srfi-151.html
+[r7rs small]: https://small.r7rs.org/
 [call-cc]: https://call-cc.org
 [call-cc eggs]: https://eggs.call-cc.org/
