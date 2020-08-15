@@ -1,17 +1,17 @@
 (test-group "conversion from functions"
-  (test "from-le"
+  (test "le->instr"
     lui-instr
-    (from-le lui-instr))
+    (le->instr lui-instr))
 
-  (test "from-be"
+  (test "be->instr"
     lui-instr
-    (from-be #x37feffff)))
+    (be->instr #x37feffff)))
 
 (test-group "conversion to functions"
-  (test "to-le"
+  (test "instr->le"
     beq-instr
-    (to-le beq-instr))
+    (instr->le beq-instr))
 
-  (test "to-be"
+  (test "instr->be"
     beq-instr
-    (to-be #x6300b502)))
+    (instr->be #x6300b502)))

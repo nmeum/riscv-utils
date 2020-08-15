@@ -12,14 +12,14 @@
     (arithmetic-shift (get-byte u32 2) 8)
     (get-byte u32 3)))
 
-(define (from-le instr)
+(define (le->instr instr)
   instr)
 
-(define (from-be instr)
+(define (be->instr instr)
   (byte-swap instr))
 
-(define (to-le instr)
+(define (instr->le instr)
   instr)
 
-(define (to-be instr)
+(define (instr->be instr)
   (byte-swap instr))
