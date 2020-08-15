@@ -1,5 +1,9 @@
 (import srfi-151)
 
+;; Size of instruction in bits.
+;; XXX: Compressed instructions currently not supported.
+(define INSTR_SIZE 32)
+
 ;; Wrapper around bit-field to support the imm[end:start]
 ;; syntax used in the RISC-V specification.
 (define (imm-field instr end start)
@@ -30,7 +34,7 @@
 
 (define (r-type opcode funct3 funct7
           rs1 rs2 rd)
-  (new-instr 32
+  (new-instr INSTR_SIZE
     (field funct7 7)
     (field rs2 5)
     (field rs1 5)
@@ -40,7 +44,7 @@
 
 (define (i-type opcode funct3 rs1 rd imm)
   (let ((imm-signed (to-twocomp 12 imm)))
-    (new-instr 32
+    (new-instr INSTR_SIZE
       (field imm-signed 12)
       (field rs1 5)
       (field funct3 3)
@@ -49,7 +53,7 @@
 
 (define (s-type opcode funct3 rs1 rs2 imm)
   (let ((imm-signed (to-twocomp 12 imm)))
-    (new-instr 32
+    (new-instr INSTR_SIZE
       (field (imm-field imm-signed 11 5) 7)
       (field rs2 5)
       (field rs1 5)
@@ -58,7 +62,7 @@
       (field opcode 7))))
 
 (define (u-type opcode rd imm)
-  (new-instr 32
+  (new-instr INSTR_SIZE
     (field imm 20)
     (field rd 5)
     (field opcode 7)))
