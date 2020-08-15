@@ -8,6 +8,8 @@
 ;; syntax used in the RISC-V specification.
 (define (imm-field instr end start)
   (bit-field instr start (+ end 1)))
+(define (imm-field-single instr pos)
+  (imm-field instr pos pos))
 
 (define (to-twocomp numbits input)
   (let ((max (/ (expt 2 numbits) 2)))
@@ -59,6 +61,18 @@
       (field rs1 5)
       (field funct3 3)
       (field (imm-field imm-signed 4 0) 5)
+      (field opcode 7))))
+
+(define (b-type opcode funct3 rs1 rs2 imm)
+  (let ((imm-signed (to-twocomp 12 imm)))
+    (new-instr INSTR_SIZE
+      (field (imm-field-single imm-signed 12) 1)
+      (field (imm-field imm-signed 10 5) 6)
+      (field rs2 5)
+      (field rs1 5)
+      (field funct3 3)
+      (field (imm-field imm-signed 4 1) 4)
+      (field (imm-field-single imm-signed 11) 1)
       (field opcode 7))))
 
 (define (u-type opcode rd imm)

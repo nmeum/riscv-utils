@@ -49,6 +49,15 @@
     (test-exception
       (s-type #b0100011 #b010 9 1 (expt 2 12)))))
 
+(test-group "encode B-type"
+  (test "encode beq instruction"
+    beq-instr
+    (b-type #b1100011 #b000 10 11 32))
+
+  (test "encode beq instruction with negative immediate"
+    -2048
+    (instr-b-imm (b-type #b1100011 #b000 10 11 -2048))))
+
 (test-group "encode U-type"
   (test "encode lui instruction"
     lui-instr
