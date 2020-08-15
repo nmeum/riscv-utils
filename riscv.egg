@@ -1,5 +1,5 @@
 ((author "Sören Tempel")
- (synopsis "A tracker for reading material")
+ (synopsis "Utilities for the RISC-V instruction set architecture")
  (license "GPLv3")
  (dependencies srfi-151)
  (test-dependencies test)
