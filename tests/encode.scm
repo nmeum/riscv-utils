@@ -48,3 +48,8 @@
     exception-raised
     (test-exception
       (s-type #b0100011 #b010 9 1 (expt 2 12)))))
+
+(test-group "encode u-type"
+  (test "encode lui instruction"
+    lui-instr
+    (u-type #b0110111 28 #xfffff)))

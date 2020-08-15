@@ -7,7 +7,7 @@
           instr-b-imm instr-u-imm instr-j-imm)
 
   ;; Encoder procedures
-  (export r-type i-type s-type)
+  (export r-type i-type s-type u-type)
 
   (include "riscv/decode.scm")
   (include "riscv/encode.scm"))

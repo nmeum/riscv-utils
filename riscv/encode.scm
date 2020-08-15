@@ -63,3 +63,9 @@
       (field funct3 3)
       (field (imm-field imm 4 0) 5) ;; XXX: field-signed
       (field opcode 7))))
+
+(define (u-type opcode rd imm)
+  (new-instr 32
+    (field imm 20)
+    (field rd 5)
+    (field opcode 7)))
