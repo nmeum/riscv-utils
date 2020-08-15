@@ -12,6 +12,10 @@
   ;; Converter procedures
   (export from-le from-be to-le to-be)
 
+  ;; Opcode procedures
+  (export get-opcode get-funct3 get-funct7)
+
   (include "riscv/decode.scm")
   (include "riscv/encode.scm")
-  (include "riscv/convert.scm"))
+  (include "riscv/convert.scm")
+  (include "riscv/opcodes.scm"))
