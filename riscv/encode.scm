@@ -53,6 +53,7 @@
     (field opcode 7)))
 
 (define (s-type opcode funct3 rs1 rs2 imm)
+  ;; TODO: Convert to two's complement first, then split
   (if (>= imm (expt 2 12))
     (error "immediate exceeds maximum value")
     (new-instr 32
@@ -60,5 +61,5 @@
       (field rs2 5)
       (field rs1 5)
       (field funct3 3)
-      (field (imm-field imm 4 0) 5)
+      (field (imm-field imm 4 0) 5) ;; XXX: field-signed
       (field opcode 7))))
