@@ -6,7 +6,7 @@ This repository provides various utilities for the [RISC-V][riscv website] instr
 
 The feature set of provided procedures is centered around easing the
 development of utilities for RISC-V (especially instruction set
-simulators). Currently the following features a provided:
+simulators). Currently the following features are provided:
 
 * `decode.scm`: Decoding of RISC-V instructions.
 * `encode.scm`: Encoding of RISC-V instructions.
@@ -18,19 +18,18 @@ The code is supposed to be used from a Scheme REPL, no binaries are
 provided. The Scheme files in the `riscv/` directory are mostly(?)
 R7RS compatible. It should be possible to use them with any
 standard compliant Scheme implementation which provides an
-[SRFI-151 module][sfri-151]. Just load the files you want to use
+[SRFI-151][srfi-151] module. Just load the files you want to use
 using `(load "riscv/<file>.scm")` from your Scheme REPL.
 
 If your favorite Scheme implementation is [CHICKEN][call-cc], read on.
 
 ## Installation
 
-In addition to standard compliant(?) Scheme source code, this
-repository also contains the required files for using the code as a
-[CHICKEN Scheme][call-cc] [egg][call-cc eggs]. However, since
-the code is still in very early stages of development I haven't
-published it as an egg yet. Nonetheless, an egg can be built
-locally using:
+In addition to standard compliant(?) Scheme source code, this repository
+also contains the required files for using the code as a CHICKEN Scheme
+[egg][call-cc eggs]. However, since the code is still in very early
+stages of development I haven't published it as an egg yet. Nonetheless,
+an egg can be built locally using:
 
 	$ chicken-install -test
 
