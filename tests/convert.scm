@@ -22,4 +22,12 @@
 
   (test "instr->bin binary"
     "#b111111111111"
-    (instr->bin #b111111111111)))
+    (instr->bin #b111111111111))
+
+  (test "instr->hex with beqi-instr"
+    "#x02b50063"
+    (instr->hex beq-instr))
+
+  (test "instr->hex with large value"
+    "#x02b3f67135a4"
+    (instr->hex #x02b3f67135a4)))

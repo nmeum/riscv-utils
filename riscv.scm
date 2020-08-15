@@ -10,7 +10,8 @@
   (export r-type i-type s-type b-type u-type j-type)
 
   ;; Converter procedures
-  (export le->instr be->instr instr->le instr->be instr->bin)
+  (export le->instr be->instr instr->le instr->be
+          instr->bin instr->hex)
 
   ;; Opcode procedures
   (export get-opcode get-funct3 get-funct7)
