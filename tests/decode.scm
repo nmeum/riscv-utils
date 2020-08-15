@@ -1,6 +1,6 @@
 (test-group "decode R-type"
   (test "parse add instruction opcode"
-    #b0110011
+    (get-opcode 'ADD)
     (instr-opcode add-instr))
 
   (test "parse add instruction rd"
@@ -16,16 +16,16 @@
     (instr-rs2 add-instr))
 
   (test "parse add instruction func3"
-    #b000
+    (get-funct3 'ADD)
     (instr-funct3 add-instr))
 
   (test "parse add instruction func7"
-    #b0000000
+    (get-funct7 'ADD)
     (instr-funct7 add-instr)))
 
 (test-group "decode I-type"
   (test "parse addi instruction opcode"
-    #b0010011
+    (get-opcode 'ADDI)
     (instr-opcode addi-instr))
 
   (test "parse addi instruction rd"
@@ -41,12 +41,12 @@
     (instr-i-imm addi-instr))
 
   (test "parse addi instruction funct3"
-    #b000
+    (get-funct3 'ADDI)
     (instr-funct3 addi-instr)))
 
 (test-group "decode S-type"
   (test "parse sw instruction opcode"
-    #b0100011
+    (get-opcode 'SW)
     (instr-opcode sw-instr))
 
   (test "parse sw instruction rs1"
@@ -62,12 +62,12 @@
     (instr-s-imm sw-instr))
 
   (test "parse sw instruction funct3"
-    #b010
+    (get-funct3 'SW)
     (instr-funct3 sw-instr)))
 
 (test-group "decode U-type"
   (test "parse lui instruction opcode"
-    #b0110111
+    (get-opcode 'LUI)
     (instr-opcode lui-instr))
 
   (test "parse lui instruction rd"
@@ -80,7 +80,7 @@
 
 (test-group "decode B-type"
   (test "parse beq instruction opcode"
-    #b1100011
+    (get-opcode 'BEQ)
     (instr-opcode beq-instr))
 
   (test "parse beq instruction rs1"
@@ -96,12 +96,12 @@
     (instr-b-imm beq-instr))
 
   (test "parse beq instruction funct3"
-    #b000
+    (get-funct3 'BEQ)
     (instr-funct3 beq-instr)))
 
 (test-group "decode J-type"
   (test "parse jal instruction opcode"
-    #b1101111
+    (get-opcode 'JAL)
     (instr-opcode jal-instr))
 
   (test "parse jal instruction rd"
