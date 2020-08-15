@@ -1,6 +1,6 @@
 # riscv-utils
 
-This repository provides various utilities for the [RISC-V][riscv website] instruction set.
+Scheme utility procedures for the [RISC-V][riscv website] instruction set architecture.
 
 ## Features
 
