@@ -8,3 +8,5 @@
   (include-relative "decode.scm"))
 (test-group "encode"
   (include-relative "encode.scm"))
+(test-group "convert"
+  (include-relative "convert.scm"))

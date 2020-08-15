@@ -10,5 +10,7 @@
 
 (define (from-be instr)
   (bitwise-ior
-    (arithmetic-shift (get-byte instr 1) 8)
-    (get-byte instr 0)))
+    (arithmetic-shift (get-byte instr 0) 24)
+    (arithmetic-shift (get-byte instr 1) 16)
+    (arithmetic-shift (get-byte instr 2) 8)
+    (get-byte instr 3)))

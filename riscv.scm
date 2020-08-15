@@ -9,5 +9,9 @@
   ;; Encoder procedures
   (export r-type i-type s-type u-type)
 
+  ;; Converter procedures
+  (export from-le from-be)
+
   (include "riscv/decode.scm")
-  (include "riscv/encode.scm"))
+  (include "riscv/encode.scm")
+  (include "riscv/convert.scm"))

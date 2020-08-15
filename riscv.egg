@@ -8,4 +8,5 @@
               (source "riscv.scm")
               (source-dependencies
                 "./riscv/encode.scm"
-                "./riscv/decode.scm"))))
+                "./riscv/decode.scm"
+                "./riscv/convert.scm"))))
