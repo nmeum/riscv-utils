@@ -62,6 +62,8 @@
       (string-append (if bit "1" "0") output)) "" instr)))
 
 (define (instr->hex instr)
+  (define seed "#x")
+
   (define (nibble->hex nibble)
     (vector-ref #(
       "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f"
@@ -70,6 +72,8 @@
     (byte-fold (lambda (byte str)
                  (let ((nibble1 (arithmetic-shift byte -4))
                        (nibble2 (bitwise-and byte #x0f)))
-                   (string-append str (nibble->hex nibble1)
+                   (string-append str
+                                  (let ((h (nibble->hex nibble1)))
+                                    (if (and (equal? str seed) (equal? h "0")) "" h))
                                   (nibble->hex nibble2))))
-               "#x" instr))
+               seed instr))
