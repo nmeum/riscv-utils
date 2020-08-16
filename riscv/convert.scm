@@ -22,7 +22,7 @@
     (/
       (if (zero? rem)
         bit-length
-        (+ (- bit-length rem) 8))
+        (+ (- bit-length rem) 8)) ;; Round to next byte boundary
       8)))
 
 (define (byte-fold proc seed number)
