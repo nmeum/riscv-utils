@@ -56,7 +56,7 @@ an egg can be built locally using:
 
 If installation is not desired, build as follows:
 
-	$ export CHICKEN_REPOSITORY_PATH="${CHICKEN_REPOSITORY_PATH}:$(pwd)"
+	$ export CHICKEN_REPOSITORY_PATH="$(pwd):${CHICKEN_REPOSITORY_PATH}"
 	$ chicken-install -n -test
 
 Afterwards simply run `(import riscv)` in `csi(1)` as usual.
