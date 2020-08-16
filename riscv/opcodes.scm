@@ -1,13 +1,17 @@
 ;; Partially auto generated using https://github.com/nmeum/riscv-opcodes
 
+(define (get-value sym alist)
+  (let ((val (assoc sym alist)))
+    (if val (cdr val) val)))
+
 (define (get-opcode instr-symbol)
-  (cdr (assoc instr-symbol OPCODES)))
+  (get-value instr-symbol OPCODES))
 
 (define (get-funct3 instr-symbol)
-  (cdr (assoc instr-symbol FUNCT3)))
+  (get-value instr-symbol FUNCT3))
 
 (define (get-funct7 instr-symbol)
-  (cdr (assoc instr-symbol FUNCT7)))
+  (get-value instr-symbol FUNCT7))
 
 (define OPCODES '(
   (BEQ . #x63)
