@@ -24,7 +24,7 @@ using `(load "riscv/<file>.scm")` from your Scheme REPL.
 
 If your favorite Scheme implementation is [CHICKEN][call-cc], read on.
 
-## Example
+### Example
 
 The API is intentionally very low-level. Nonetheless, many fun things
 can be done with it. The following example takes an existing `JAL`
