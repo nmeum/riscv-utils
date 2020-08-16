@@ -32,7 +32,9 @@
        (proc (get-byte number n)
              (recur (+ n 1)))))
 
-  (recur 0))
+  (if (zero? number)
+    (proc 0 seed)
+    (recur 0)))
 
 ;;;;
 ;; Byte order conversion

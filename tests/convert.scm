@@ -30,4 +30,8 @@
 
   (test "instr->hex with large value"
     "#x02b3f67135a4"
-    (instr->hex #x02b3f67135a4)))
+    (instr->hex #x02b3f67135a4))
+
+  (test "instr->hex with zero"
+    "#x00"
+    (instr->hex 0)))
