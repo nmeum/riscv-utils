@@ -41,6 +41,13 @@ output) and modifies it to jump somewhere else.
 
 The value `33555823` (`0x200056f`) is RISC-V machine code for a JAL
 instruction holing the value `32` (instead of `16`) as a J-immediate.
+This can be easily verified using:
+
+	> (set! jal-new 33555823)
+	> (instr->hex jal-new)
+	"#x0200056f"
+	> (instr-j-imm jal-new)
+	32
 
 ## Installation
 
