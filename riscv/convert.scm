@@ -60,12 +60,14 @@
       (string-append (if bit "1" "0") output)) "" instr)))
 
 (define (instr->hex instr)
-  (let ((chars #("0" "1" "2" "3" "4" "5" "6" "7" "8" "9"
-                 "a" "b" "c" "d" "e" "f")))
-    ;; TODO: Leading zeros are not stripped currently
-    (byte-fold (lambda (digit str)
-                 (string-append
-                   str
-                   (vector-ref chars (arithmetic-shift digit -4))
-                   (vector-ref chars (bitwise-and digit #x0f))))
-               "#x" instr)))
+  (define (nibble->hex nibble)
+    (vector-ref #(
+      "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f"
+     ) nibble))
+
+    (byte-fold (lambda (byte str)
+                 (let ((nibble1 (arithmetic-shift byte -4))
+                       (nibble2 (bitwise-and byte #x0f)))
+                   (string-append str (nibble->hex nibble1)
+                                  (nibble->hex nibble2))))
+               "#x" instr))
