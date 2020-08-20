@@ -57,9 +57,11 @@
 ;;;;
 
 (define (instr->bin instr)
-  (string-append "#b"
-    (bitwise-fold (lambda (bit output)
-      (string-append (if bit "1" "0") output)) "" instr)))
+  (if (negative? instr)
+    (error "not a valid RISC-V instruction")
+    (string-append "#b"
+      (bitwise-fold (lambda (bit output)
+        (string-append (if bit "1" "0") output)) "" instr))))
 
 (define (instr->hex instr)
   (define (nibble->hex nibble)
@@ -67,9 +69,11 @@
       "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f"
      ) nibble))
 
-    (byte-fold (lambda (byte str)
-                 (let ((nibble1 (arithmetic-shift byte -4))
-                       (nibble2 (bitwise-and byte #x0f)))
-                   (string-append str (nibble->hex nibble1)
-                                  (nibble->hex nibble2))))
-               "#x" instr))
+    (if (negative? instr)
+      (error "not a valid RISC-V instruction")
+      (byte-fold (lambda (byte str)
+                   (let ((nibble1 (arithmetic-shift byte -4))
+                         (nibble2 (bitwise-and byte #x0f)))
+                     (string-append str (nibble->hex nibble1)
+                                    (nibble->hex nibble2))))
+                 "#x" instr)))
