@@ -8,6 +8,10 @@
   (bitwise-and (arithmetic-shift value
                                  (* -1 (* nth 8)))
                #xff))
+(define (get-nibble value nth)
+  (bitwise-and (arithmetic-shift value
+                                 (* -1 (* nth 4)))
+               #xf))
 
 (define (byte-swap u32)
   (bitwise-ior
@@ -16,21 +20,21 @@
     (arithmetic-shift (get-byte u32 2) 8)
     (get-byte u32 3)))
 
-(define (byte-length number)
+(define (nibble-length number)
   (let* ((bit-length (integer-length number))
-         (rem (modulo bit-length 8)))
+         (rem (modulo bit-length 4)))
     (/
       (if (zero? rem)
         bit-length
-        (+ (- bit-length rem) 8)) ;; Round to next byte boundary
-      8)))
+        (+ (- bit-length rem) 4)) ;; Round to next nibble boundary
+      4)))
 
-(define (byte-fold proc seed number)
+(define (nibble-fold proc seed number)
   (define (recur n)
-     (if (>= n (byte-length number))
-       seed
-       (proc (get-byte number n)
-             (recur (+ n 1)))))
+    (if (>= n (nibble-length number))
+      seed
+      (proc (get-nibble number n)
+            (recur (+ n 1)))))
 
   (if (zero? number)
     (proc 0 seed)
@@ -71,9 +75,6 @@
 
     (if (negative? instr)
       (error "not a valid RISC-V instruction")
-      (byte-fold (lambda (byte str)
-                   (let ((n2 (arithmetic-shift byte -4))
-                         (n2 (bitwise-and byte #x0f)))
-                     (string-append str (nibble->hex n1)
-                                    (nibble->hex n2))))
+      (nibble-fold (lambda (nibble str)
+                     (string-append str (nibble->hex nibble)))
                  "#x" instr)))
