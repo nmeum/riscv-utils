@@ -4,14 +4,13 @@
 ;; Utility procedures
 ;;;;
 
-(define (get-byte value nth)
-  (bitwise-and (arithmetic-shift value
-                                 (* -1 (* nth 8)))
-               #xff))
-(define (get-nibble value nth)
-  (bitwise-and (arithmetic-shift value
-                                 (* -1 (* nth 4)))
-               #xf))
+(define (get-elem unit value nth)
+  (let ((mask  (- (expt 2 unit) 1))
+        (shamt (* -1 (* nth unit))))
+    (bitwise-and (arithmetic-shift value shamt) mask)))
+
+(define (get-byte value nth)   (get-elem 8 value nth))
+(define (get-nibble value nth) (get-elem 4 value nth))
 
 (define (byte-swap u32)
   (bitwise-ior
