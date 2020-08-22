@@ -61,14 +61,17 @@
 ;;;;
 
 (define (instr->bin instr)
+  (define (bit->string bit)
+    (if bit "1" "0"))
+
   (if (negative? instr)
     (error "not a valid RISC-V instruction")
     (string-append "#b"
       (bitwise-fold (lambda (bit output)
-        (string-append (if bit "1" "0") output)) "" instr))))
+        (string-append (bit->string bit) output)) "" instr))))
 
 (define (instr->hex instr)
-  (define (nibble->hex nibble)
+  (define (nibble->string nibble)
     (vector-ref #(
       "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f"
      ) nibble))
@@ -76,5 +79,5 @@
     (if (negative? instr)
       (error "not a valid RISC-V instruction")
       (nibble-fold (lambda (nibble str)
-                     (string-append str (nibble->hex nibble)))
+                     (string-append str (nibble->string nibble)))
                  "#x" instr)))
