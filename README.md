@@ -12,6 +12,7 @@ simulators). Currently the following features are provided:
 * `encode.scm`: Encoding of RISC-V instructions.
 * `convert.scm`: Conversion from/to different representations.
 * `opcodes.scm`: Constants for instruction opcodes (currently rv32i only).
+* `disassemble.scm`: High-level API around the decoder.
 
 ## Usage
 

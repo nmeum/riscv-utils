@@ -4,6 +4,9 @@
   (let ((val (assoc sym alist)))
     (if val (cdr val) val)))
 
+(define (get-type instr-symbol)
+  (get-value instr-symbol TYPES))
+
 (define (get-opcode instr-symbol)
   (get-value instr-symbol OPCODES))
 
@@ -12,6 +15,10 @@
 
 (define (get-funct7 instr-symbol)
   (get-value instr-symbol FUNCT7))
+
+(define TYPES '(
+  (ADD . 'rtype)
+))
 
 (define OPCODES '(
   (BEQ . #x63)

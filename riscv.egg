@@ -10,4 +10,5 @@
                 "./riscv/encode.scm"
                 "./riscv/decode.scm"
                 "./riscv/convert.scm"
-                "./riscv/opcodes.scm"))))
+                "./riscv/opcodes.scm"
+                "./riscv/disassemble.scm"))))

@@ -16,7 +16,11 @@
   ;; Opcode procedures
   (export get-opcode get-funct3 get-funct7)
 
+  ;; Disassembler procedures
+  (export disassemble)
+
   (include "riscv/decode.scm")
   (include "riscv/encode.scm")
   (include "riscv/convert.scm")
-  (include "riscv/opcodes.scm"))
+  (include "riscv/opcodes.scm")
+  (include "riscv/disassemble.scm"))
