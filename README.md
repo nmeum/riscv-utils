@@ -45,7 +45,7 @@ This can be easily verified using:
 
 	> (set! jal-new 33555823)
 	> (instr->hex jal-new)
-	"#x0200056f"
+	"#x200056f"
 	> (instr-j-imm jal-new)
 	32
 
