@@ -1,5 +1,9 @@
 (import srfi-151)
 
+;;;;
+;; Utility procedures
+;;;;
+
 ;; The bit-field procedure from SRFI-151 returns a bit field in the
 ;; interval [start, end - 1]. Contrary to bit-field, instr-field returns
 ;; a field in the interval [start, end] to allow using the same notation
@@ -12,6 +16,10 @@
   (let ((mask (expt 2 (- numbits 1))))
     (+ (* -1 (bitwise-and input mask))
        (bitwise-and input (bitwise-not mask)))))
+
+;;;;
+;; Instruction fields
+;;;;
 
 (define (instr-opcode instr)
   (instr-field instr 0 6))
@@ -30,6 +38,10 @@
 
 (define (instr-rd instr)
   (instr-field instr 7 11))
+
+;;;;
+;; Instruction immediates
+;;;
 
 (define (instr-i-imm instr)
   (from-twocomp 12
